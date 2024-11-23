@@ -85,15 +85,16 @@ fn main() -> Result<()> {
         .arg("--expt-relaxed-constexpr")
         .arg("--expt-extended-lambda")
         .arg("--use_fast_math")
-        .arg("--verbose");
+        .arg("--verbose")
+        .arg("-Xcompiler")
+        .arg("/bigobj");
 
-    let out_file = build_dir.join("libflashattention.a");
+    let out_file = build_dir.join("flashattention.lib");
     builder.build_lib(out_file);
 
     println!("cargo:rustc-link-search={}", build_dir.display());
     println!("cargo:rustc-link-lib=flashattention");
     println!("cargo:rustc-link-lib=dylib=cudart");
-    println!("cargo:rustc-link-lib=dylib=stdc++");
 
     Ok(())
 }

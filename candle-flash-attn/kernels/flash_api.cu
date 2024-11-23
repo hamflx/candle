@@ -2,6 +2,10 @@
 #include "kernel_helpers.h"
 #include "flash_fwd_launch_template.h"
 
+#ifndef M_LOG2E
+#define M_LOG2E 1.4426950408889634074
+#endif
+
 void run_mha_fwd(Flash_fwd_params &params, cudaStream_t stream) {
   FP16_SWITCH(!params.is_bf16, [&] {
       HEADDIM_SWITCH(params.d, [&] {
